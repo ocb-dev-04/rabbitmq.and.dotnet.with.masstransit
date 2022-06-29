@@ -26,7 +26,7 @@ public class ServiceBController : ControllerBase
             _logger.LogWarning("Sending data to message bus");
             var publishMessage = new RabbitMQ.Core.Models.RabbitPublishedDTO()
             {
-                Event = "trigger",
+                Event = $"{value}_event",
                 Id = Guid.NewGuid(),
                 Name = value
             };
