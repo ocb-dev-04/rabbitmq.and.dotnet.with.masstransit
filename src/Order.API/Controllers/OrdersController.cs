@@ -30,7 +30,9 @@ namespace Order.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> CreateOrder([FromRoute, Required] string id)
         {
+            _logger.LogWarning($"Find order with id => {id}");
             var response = await _client.GetResponse<OrderStatusResult>(new { OrderId = id });
+            
             return Ok(response.Message);
         }
     }

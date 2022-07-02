@@ -20,16 +20,18 @@ builder.Services.AddMassTransit(x =>
     //x.AddSagas(entryAssembly);
     //x.AddActivities(entryAssembly);
 
-    x.AddConsumer<CheckOrderStatusConsumer>( (config) => {});
-    x.AddRequestClient<CheckOrderStatus>(new Uri("exchange:order-status"));
+    //x.AddConsumer<CheckOrderStatusConsumer>((config) => { });
+    
+    x.AddConsumer<CheckOrderStatusConsumer>();
     x.UsingRabbitMq((ctx, config) =>
         {
             config.Host(builder.Configuration.GetConnectionString("RabbitMq"));
-        //config.Host( "localhost","/",hostConfig =>
-        //    {
-        //        hostConfig.Username("guest");
-        //        hostConfig.Password("guest");
-        //    });
+            //config.Host( "localhost","/",hostConfig =>
+            //    {
+            //        hostConfig.Username("guest");
+            //        hostConfig.Password("guest");
+            //    });
+            config.ConfigureEndpoints(ctx);
         });
 });
 
