@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
 
-using Order.API.Models;
+using Microsoft.AspNetCore.Mvc;
+
+using MassTransit;
+
+using Order.API.MessageContract;
 
 namespace Order.API.Controllers
 {
@@ -8,34 +12,26 @@ namespace Order.API.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
+        #region Props & Ctor
+
+        private readonly IRequestClient<CheckOrderStatus> _client;
+        private readonly ILogger<OrdersController> _logger;
+
+        public OrdersController(
+            IRequestClient<CheckOrderStatus> client,
+            ILogger<OrdersController> logger)
         {
-            return new string[] { "value1", "value2" };
+            _client = client;
+            _logger = logger;
         }
+
+        #endregion
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> CreateOrder([FromRoute, Required] string id)
         {
-            return "value";
-        }
-
-        [HttpPost]
-        public IActionResult Post([FromBody] OrderDTO data)
-        {
-            return Ok();
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] OrderDTO data)
-        {
-            return Ok();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            return Ok();
+            var response = await _client.GetResponse<OrderStatusResult>(new { OrderId = id });
+            return Ok(response.Message);
         }
     }
 }

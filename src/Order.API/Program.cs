@@ -1,4 +1,7 @@
 using MassTransit;
+using Order.API.Consumer;
+using Order.API.MessageContract;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,23 +9,29 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMassTransit(bus =>
+builder.Services.AddMassTransit(x =>
 {
-    bus.UsingRabbitMq((ctx, config) =>
-    {
-        //config.Host(builder.Configuration.GetConnectionString("RabbitMq"));
-        config.Host(
-            "localhost",
-            "/",
-            hostConfig =>
-        {
-            hostConfig.Username("guest");
-            hostConfig.Password("guest");
-        });
-    });
-});
+    //x.SetKebabCaseEndpointNameFormatter();
+    //x.SetInMemorySagaRepositoryProvider();
 
-builder.Services.AddMassTransitHostedService();
+    //var entryAssembly = Assembly.GetEntryAssembly();
+    //x.AddConsumers(entryAssembly);
+    //x.AddSagaStateMachines(entryAssembly);
+    //x.AddSagas(entryAssembly);
+    //x.AddActivities(entryAssembly);
+
+    x.AddConsumer<CheckOrderStatusConsumer>( (config) => {});
+    x.AddRequestClient<CheckOrderStatus>(new Uri("exchange:order-status"));
+    x.UsingRabbitMq((ctx, config) =>
+        {
+            config.Host(builder.Configuration.GetConnectionString("RabbitMq"));
+        //config.Host( "localhost","/",hostConfig =>
+        //    {
+        //        hostConfig.Username("guest");
+        //        hostConfig.Password("guest");
+        //    });
+        });
+});
 
 var app = builder.Build();
 
