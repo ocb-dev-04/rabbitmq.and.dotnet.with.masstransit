@@ -2,12 +2,12 @@
 
 namespace Rabbit.MQ.Core.Interfaces
 {
-    public interface IRequestClientRepository<GRequest, GResult>
+    public interface IRequestClientRepository<GResult>
     {
         /// <summary>
-        /// Use <see cref="GRequest"/> to get <see cref="GResult"/> value from mass transit
+        /// Make request to get <see cref="GResult"/> value from mass transit
         /// </summary>
         /// <returns></returns>
-        Task<Response<GResult>?> RequestData(object value);
+        Task<Response<GResult>?> RequestToMQ(object value, int timeoutSeconds = 10);
     }
 }
