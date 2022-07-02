@@ -1,4 +1,4 @@
-﻿namespace Order.API.Constants
+﻿namespace Rabbit.MQ.Core.API.Constants
 {
     public static class ConsumersConstants
     {

@@ -1,4 +1,4 @@
-﻿namespace Order.API.MessageContract;
+﻿namespace Rabbit.MQ.Core.MessageContract;
 
 public interface CheckOrderStatus
 {

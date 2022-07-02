@@ -5,6 +5,10 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.API", "Order.API\Order.API.csproj", "{537EDB91-4669-481A-9247-FB6F672EE9AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Other.API", "Other.API\Other.API.csproj", "{288A0153-48BD-4F4F-B7D7-7CF669E1AB65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rabbit.MQ.Core", "Rabbit.MQ.Core\Rabbit.MQ.Core.csproj", "{231010A4-C7EF-4408-A00C-4138114681D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{537EDB91-4669-481A-9247-FB6F672EE9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{537EDB91-4669-481A-9247-FB6F672EE9AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{537EDB91-4669-481A-9247-FB6F672EE9AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{288A0153-48BD-4F4F-B7D7-7CF669E1AB65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{288A0153-48BD-4F4F-B7D7-7CF669E1AB65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{288A0153-48BD-4F4F-B7D7-7CF669E1AB65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{288A0153-48BD-4F4F-B7D7-7CF669E1AB65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{231010A4-C7EF-4408-A00C-4138114681D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{231010A4-C7EF-4408-A00C-4138114681D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{231010A4-C7EF-4408-A00C-4138114681D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{231010A4-C7EF-4408-A00C-4138114681D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

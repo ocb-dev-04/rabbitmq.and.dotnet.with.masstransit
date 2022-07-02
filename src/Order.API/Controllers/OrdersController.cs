@@ -3,8 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using MassTransit;
-
-using Order.API.MessageContract;
+using Rabbit.MQ.Core.MessageContract;
 
 namespace Order.API.Controllers
 {
@@ -30,7 +29,7 @@ namespace Order.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> CreateOrder([FromRoute, Required] string id)
         {
-            _logger.LogWarning($"Find order with id => {id}");
+            _logger.LogWarning($"Find order with id => {id} in Order.API.Controllers");
             var response = await _client.GetResponse<OrderStatusResult>(new { OrderId = id });
             
             return Ok(response.Message);

@@ -1,5 +1,5 @@
 using MassTransit;
-using Rabbit.MQ.Core.MessageContract;
+using Other.API.Consumer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,17 +9,21 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMassTransit(busRegConfig =>
 {
-    busRegConfig.AddRequestClient(typeof(CheckOrderStatus), TimeSpan.FromSeconds(10));
-    busRegConfig.UsingRabbitMq((ctx, config) =>
-        {
-            config.Host("localhost", "/", hostConfig =>
-                {
-                    hostConfig.Username("guest");
-                    hostConfig.Password("guest");
-                });
+    busRegConfig.SetKebabCaseEndpointNameFormatter(); // consumer-name
+    // busRegConfig.SetSnakeCaseEndpointNameFormatter(); // consumer_name
 
-            config.ConfigureEndpoints(ctx);
-        });
+    busRegConfig.AddConsumer<CheckOrderStatusConsumer, CheckOrderStatusConsumerDefinition>();
+
+    busRegConfig.UsingRabbitMq((ctx, config) =>
+    {
+        // config.ReceiveEndpoint(ConsumersConstants.CheckOrderStatus, e =>
+        //     {
+        //         e.ConfigureConsumer<CheckOrderStatusConsumer>(ctx);
+        //     });
+
+        config.Host(builder.Configuration.GetConnectionString("RabbitMq"));
+        config.ConfigureEndpoints(ctx);
+    });
 });
 
 builder.Services.AddOptions<MassTransitHostOptions>()
