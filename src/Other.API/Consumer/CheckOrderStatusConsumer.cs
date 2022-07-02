@@ -55,7 +55,7 @@ namespace Other.API.Consumer
     {
         public CheckOrderStatusConsumerDefinition()
         {
-            EndpointName = ConsumersConstants.CheckOrderStatus;
+            EndpointName = ConsumersConstants.CheckOrderStatusConsumer;
             //ConcurrentMessageLimit = 8;
         }
 

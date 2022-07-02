@@ -12,11 +12,7 @@ builder.Services.AddMassTransit(busRegConfig =>
     busRegConfig.AddRequestClient(typeof(CheckOrderStatus), TimeSpan.FromSeconds(10));
     busRegConfig.UsingRabbitMq((ctx, config) =>
         {
-            config.Host("localhost", "/", hostConfig =>
-                {
-                    hostConfig.Username("guest");
-                    hostConfig.Password("guest");
-                });
+            config.Host(builder.Configuration.GetConnectionString("RabbitMq"));
 
             config.ConfigureEndpoints(ctx);
         });

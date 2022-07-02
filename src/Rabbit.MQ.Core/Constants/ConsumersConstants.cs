@@ -2,6 +2,6 @@
 {
     public static class ConsumersConstants
     {
-        public static string CheckOrderStatus = "check-order-status";
+        public static string CheckOrderStatusConsumer = "check-order-status:consumer";
     }
 }
