@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,17 +37,7 @@ namespace Order.API.Controllers
         public async Task<IActionResult> CreateOrder([FromRoute, Required] string id)
         {
             _logger.LogInformation($"--> Find order with id = {id} in Order.API.Controllers");
-            //Response<OrderStatusResult>? response 
-            //    = await _client.GetResponse<OrderStatusResult>(
-            //        new { OrderId = id },
-            //        context =>
-            //        {
-            //            context.TimeToLive = TimeSpan.FromSeconds(10);
-            //            context.UseTransaction(config => config.IsolationLevel = IsolationLevel.Serializable);
-
-            //            _logger.LogWarning($"Request id => {context.RequestId}");
-            //        }, 
-            //        timeout: TimeSpan.FromSeconds(10));
+            
             Response<OrderStatusResult>? response = await _requestClientRepository.RequestToMQ(new { OrderId = id }, 20);
             if (response is null) return NotFound();
 
