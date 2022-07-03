@@ -28,7 +28,7 @@ namespace Other.API.Consumer
         /// <returns></returns>
         public async Task Consume(ConsumeContext<CheckOrderStatus> context)
         {
-            _logger.LogWarning($"Find order with id => {context.Message.OrderId} in Other.API.Consumer");
+            _logger.LogInformation($"--> Find order with id = {context.Message.OrderId} in Other.API.Consumer");
 
             // emulate reuest to dbContext
             OrderDTO order = new OrderDTO(){

@@ -1,4 +1,5 @@
 using MassTransit;
+using Rabbit.MQ.Core.Implementations;
 using Rabbit.MQ.Core.MessageContract;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped(typeof(RequestClientRepository<,>));
 
 builder.Services.AddMassTransit(busRegConfig =>
 {
